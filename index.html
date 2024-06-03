@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Service</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: serif;
+    }
+    h2:hover {
+      text-decoration: underline;
+    }
+    h3, h4 {
+      margin-bottom: 5px;
+    }
+    #container {
+      margin: auto;
+      width: 700px;
+    }
+    .kode {
+      font-family: monospace;
+      font-size: larger;
+      padding: 0px 5px;
+      background-color: #eee;
+    }
+    .kode-box {
+      font-family: monospace;
+      font-size: larger;
+      padding: 10px;
+      background-color: #eee;
+      border: 1px dotted #999;
+    }
+    .keterangan {
+      background-color: #ccc;
+      border: 1px solid #999;
+      padding: 10px 20px;
+      list-style: none;
+    }
+    ul.keterangan li {
+      margin: 5px 0px;
+    }
+    .keterangan .parameter {
+      display: inline-block;
+      width: 150px;
+    }
+    .keterangan .nilai {
+      font-family: monospace;
+      font-size: large;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Dokumentasi Web Service</h1>
+    <div id="umum" class="bagian">
+      <h2>Konstruksi Umum</h2>
+      <p>
+        Semua request service dilakukan melalui <br><span class="kode">{BASE_URL}</span> :
+        <span class="kode">http://mangusada.bakpasir.web.id/</span><br>Method yang digunakan
+        adalah <span class="kode">GET</span> atau <span class="kode">POST</span> tergantung
+        jenis request.
+      </p>
+      <p>
+        Response service adalah data dalam format JSON, berupa JSON object dengan property pertama
+        adalah <span class="kode">status</span>. Property <span class="kode">status</span>
+        menunjukkan status berhasil atau tidaknya request mendapatkan data. Jika berhasil 
+        mendapatkan data, maka <span class="kode">status</span> akan bernilai <span class="kode">1</span>
+        diikuti dengan property <span class="kode">data</span> yang berisi data hasil request.
+        Namun jika gagal, maka <span class="kode">status</span> akan bernilai <span class="kode">0</span>.
+      </p>
+      <h4>Response berhasil</h4>
+      <div class="kode-box">
+        {"status":1, "data": ... }
+      </div>
+      <h4>Response gagal</h4>
+      <div class="kode-box">
+        {"status":0}
+      </div>
+    </div>
+    <div id="dokter" class="bagian">
+      <h2>Informasi Daftar Dokter</h2>
+      <ul class="keterangan">
+        <li>
+          <span class="parameter">Method</span>:
+          <span class="nilai">GET</span>
+        </li>
+        <li>
+          <span class="parameter">URL</span>:
+          <span class="nilai">{BASE_URL}/dokter/{id_poliklinik}</span>
+        </li>
+        <li>
+          <span class="parameter">Content-Type</span>:
+          <span class="nilai">application/json</span>
+        </li>
+      </ul>
+      <h4>Contoh:</h4>
+      <div class="kode-box">
+          http://mangusada.bakpasir.web.id/dokter/2
+      </div>
+      <h4>Hasil:</h4>
+      <div class="kode-box">
+          {"status":1, "data":[{"id":"5", "nama":"dr. Budiman", ... }, ... ]}
+      </div>
+    </div>
+    <div id="jadwal" class="bagian">
+      <h2>Informasi Jadwal Dokter</h2>
+      <ul class="keterangan">
+        <li>
+          <span class="parameter">Method</span>:
+          <span class="nilai">GET</span>
+        </li>
+        <li>
+          <span class="parameter">URL</span>:
+          <span class="nilai">{BASE_URL}/jadwal/{id_dokter}</span>
+        </li>
+        <li>
+          <span class="parameter">Content-Type</span>:
+          <span class="nilai">application/json</span>
+        </li>
+      </ul>
+      <h4>Contoh:</h4>
+      <div class="kode-box">
+          http://mangusada.bakpasir.web.id/jadwal/5
+      </div>
+      <h4>Hasil:</h4>
+      <div class="kode-box">
+          {"status":1, "data":[{"id":"6", "id_dokter":"5", "hari":"2", "mulai":"17:00:00", ... }, ... ]}
+      </div>
+    </div>
+    <div id="jaminan" class="bagian">
+      <h2>Informasi Daftar Jaminan</h2>
+      <ul class="keterangan">
+        <li>
+          <span class="parameter">Method</span>:
+          <span class="nilai">GET</span>
+        </li>
+        <li>
+          <span class="parameter">URL</span>:
+          <span class="nilai">{BASE_URL}/jaminan</span>
+        </li>
+        <li>
+          <span class="parameter">Content-Type</span>:
+          <span class="nilai">application/json</span>
+        </li>
+      </ul>
+      <h4>Contoh:</h4>
+      <div class="kode-box">
+          http://mangusada.bakpasir.web.id/jaminan
+      </div>
+      <h4>Hasil:</h4>
+      <div class="kode-box">
+          {"status":1, "data":[{"id":"4", "nama":"BPJS", ... }, ... ]}
+      </div>
+    </div>
+    <div id="pasien" class="bagian">
+      <h2>Informasi Data Pasien</h2>
+      <ul class="keterangan">
+        <li>
+          <span class="parameter">Method</span>:
+          <span class="nilai">GET</span>
+        </li>
+        <li>
+          <span class="parameter">URL</span>:
+          <span class="nilai">{BASE_URL}/pasien/{no_rekam_medis}</span>
+        </li>
+        <li>
+          <span class="parameter">Content-Type</span>:
+          <span class="nilai">application/json</span>
+        </li>
+      </ul>
+      <h4>Contoh:</h4>
+      <div class="kode-box">
+          http://mangusada.bakpasir.web.id/pasien/510303200000023
+      </div>
+      <h4>Hasil:</h4>
+      <div class="kode-box">
+          {"status":1, "data":{"id":"7", "rm":"510303200000023", "nik":"5102044311820002", "nama":"Ni Nyoman Mariawati", ... }}
+      </div>
+    </div>
+    <div id="poliklinik" class="bagian">
+      <h2>Informasi Daftar Poliklinik</h2>
+      <h3>Semua Poliklinik</h3>
+      <ul class="keterangan">
+        <li>
+          <span class="parameter">Method</span>:
+          <span class="nilai">GET</span>
+        </li>
+        <li>
+          <span class="parameter">URL</span>:
+          <span class="nilai">{BASE_URL}/poliklinik</span>
+        </li>
+        <li>
+          <span class="parameter">Content-Type</span>:
+          <span class="nilai">application/json</span>
+        </li>
+      </ul>
+      <h4>Contoh:</h4>
+      <div class="kode-box">
+          http://mangusada.bakpasir.web.id/poliklinik
+      </div>
+      <h4>Hasil:</h4>
+      <div class="kode-box">
+          {"status":1, "data":[{"id":"4", "nama":"Klinik Anak", "type":"2"}, ... ]}
+      </div>
+      <h3>Poliklinik Menurut Type</h3>
+      <ul class="keterangan">
+        <li>
+          <span class="parameter">Method</span>:
+          <span class="nilai">GET</span>
+        </li>
+        <li>
+          <span class="parameter">URL</span>:
+          <span class="nilai">{BASE_URL}/poliklinik/{type}</span>
+        </li>
+        <li>
+          <span class="parameter">Content-Type</span>:
+          <span class="nilai">application/json</span>
+        </li>
+      </ul>
+      <h4>Contoh:</h4>
+      <div class="kode-box">
+          http://mangusada.bakpasir.web.id/poliklinik/2
+      </div>
+      <h4>Hasil:</h4>
+      <div class="kode-box">
+          {"status":1, "data":[{"id":"4", "nama":"Klinik Anak", "type":"2"}, ... ]}
+      </div>
+    </div>
+    <div id="pendaftaran">
+      <h2>Melakukan Pendaftaran</h2>
+    </div>
+  </div>
+</body>
+</html>
