@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-define(DBHOST, '127.0.0.1');
-define(DBUSER, 'dbuser');
-define(DBPASS, 'dbpass');
-define(DBNAME, 'dbname');
+const DBHOST = '127.0.0.1';
+const DBUSER = 'dbuser';
+const DBPASS = 'dbpass';
+const DBNAME = 'dbname';
 
 if(!$link = @mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME))
 die(mysqli_connect_error());
